@@ -1,3 +1,6 @@
+// const handlers = (req, h) => {
+//   return h.response("success").type("text/plain").header("X-Custom", "Test");
+// };
 const routes = [
   {
     method: "GET",
@@ -38,6 +41,29 @@ const routes = [
         return `Hai, ${name}!`;
       }
       return `Halo, ${name}!`;
+    },
+  },
+  {
+    method: "POST",
+    path: "/login",
+    handler: (req, h) => {
+      const { username, password } = req.payload;
+      return `Login Succes, Hello ${username}`;
+    },
+  },
+  // {
+  //   method: "POST",
+  //   path: "/register",
+  //   handler: handlers,
+  // },
+  {
+    method: "POST",
+    path: "/register",
+    handler: (req, h) => {
+      return h
+        .response("success")
+        .type("text/plain")
+        .header("X-Custom", "Test");
     },
   },
   // {
