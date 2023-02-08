@@ -74,6 +74,39 @@ const getOneNotesHandler = (req, h) => {
     return response;
 };
 
-const editOneHandler = (req, h) => {};
+const editOneHandler = (req, h) => {
+    const { id } = req.params;
 
-module.exports = { addNoteHandler, getAllNotesHandler, getOneNotesHandler };
+    const { title, tags, body } = req.payload;
+    const updateAt = new Date().toISOString;
+
+    const index = notes.findIndex((note) => note.id == id);
+
+    if (index !== -1) {
+        notes[index] = {
+            ...notes[index],
+            title,
+            tags,
+            body,
+            updateAt
+        };
+
+        const response = h
+            .response({
+                status: 'succes',
+                message: 'Berhasil memperbarui catatan'
+            })
+            .code(201);
+        return response;
+    }
+
+    const response = h
+        .response({
+            status: 'fail',
+            message: 'Gagal memperbarui catatan'
+        })
+        .code(404);
+    return response;
+};
+
+module.exports = { addNoteHandler, getAllNotesHandler, getOneNotesHandler, editOneHandler };
