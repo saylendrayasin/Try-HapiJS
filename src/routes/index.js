@@ -1,3 +1,4 @@
+const { addNoteHandler, getAllNotesHandler } = require('../handler');
 const routes = [
     {
         method: 'GET',
@@ -5,6 +6,21 @@ const routes = [
         handler: (req, h) => {
             return 'Ini halaman homepage';
         }
+    },
+    {
+        method: 'POST',
+        path: '/notes',
+        handler: addNoteHandler
+    },
+    {
+        method: 'GET',
+        path: '/notes',
+        handler: getAllNotesHandler
+    },
+    {
+        method: 'POST',
+        path: '/notes/{id}',
+        handler: () => {}
     },
     {
         method: '*',
