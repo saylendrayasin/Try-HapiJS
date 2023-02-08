@@ -109,4 +109,34 @@ const editOneHandler = (req, h) => {
     return response;
 };
 
-module.exports = { addNoteHandler, getAllNotesHandler, getOneNotesHandler, editOneHandler };
+const deleteNoteHandler = (req, h) => {
+    const { id } = req.params;
+    const index = notes.findIndex((note) => note.id == id);
+
+    if (index !== -1) {
+        notes.splice(index, 1);
+        const response = h
+            .response({
+                status: 'succes',
+                message: 'Catatan berhasil dihapus'
+            })
+            .code(200);
+        return response;
+    }
+
+    const response = h
+        .response({
+            status: 'fail',
+            message: 'Catatan tidak berhasil dihapus, catatan tidak ditemukan'
+        })
+        .code(404);
+    return response;
+};
+
+module.exports = {
+    addNoteHandler,
+    getAllNotesHandler,
+    getOneNotesHandler,
+    editOneHandler,
+    deleteNoteHandler
+};
