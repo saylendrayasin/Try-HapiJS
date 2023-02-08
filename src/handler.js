@@ -53,6 +53,27 @@ const getAllNotesHandler = () => ({
 
 const getOneNotesHandler = (req, h) => {
     const { id } = req.params;
+
+    const note = notes.filter((n) => n.id == id)[0];
+
+    if (note !== undefined) {
+        return {
+            status: 'succes',
+            data: {
+                note
+            }
+        };
+    }
+
+    const response = h
+        .response({
+            status: 'fail',
+            message: 'Catatan tidak ditemukan'
+        })
+        .code(400);
+    return response;
 };
 
-module.exports = { addNoteHandler, getAllNotesHandler };
+const editOneHandler = (req, h) => {};
+
+module.exports = { addNoteHandler, getAllNotesHandler, getOneNotesHandler };
