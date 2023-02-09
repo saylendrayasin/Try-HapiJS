@@ -5,6 +5,7 @@ const {
     editOneHandler,
     deleteNoteHandler
 } = require('../handler');
+
 const routes = [
     {
         method: 'GET',

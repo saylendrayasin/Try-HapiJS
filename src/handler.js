@@ -1,5 +1,5 @@
 const { nanoid } = require('nanoid');
-const { notes } = require('./notes.js');
+const { notes } = require('./notes');
 
 const addNoteHandler = (req, h) => {
     const { title, tags, body } = req.payload;
@@ -54,7 +54,7 @@ const getAllNotesHandler = () => ({
 const getOneNotesHandler = (req, h) => {
     const { id } = req.params;
 
-    const note = notes.filter((n) => n.id == id)[0];
+    const note = notes.filter((n) => n.id === id)[0];
 
     if (note !== undefined) {
         return {
@@ -80,7 +80,7 @@ const editOneHandler = (req, h) => {
     const { title, tags, body } = req.payload;
     const updateAt = new Date().toISOString;
 
-    const index = notes.findIndex((note) => note.id == id);
+    const index = notes.findIndex((note) => note.id === id);
 
     if (index !== -1) {
         notes[index] = {
@@ -111,7 +111,7 @@ const editOneHandler = (req, h) => {
 
 const deleteNoteHandler = (req, h) => {
     const { id } = req.params;
-    const index = notes.findIndex((note) => note.id == id);
+    const index = notes.findIndex((note) => note.id === id);
 
     if (index !== -1) {
         notes.splice(index, 1);
